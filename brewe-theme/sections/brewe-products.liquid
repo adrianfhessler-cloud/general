@@ -1,6 +1,8 @@
+{%- assign shop_url = collections['alle-produkte'].url | default: routes.all_products_collection_url -%}
 {%- assign collection = collections[section.settings.collection] -%}
 {%- assign products = collection.products -%}
-{%- if collection == blank -%}{%- assign products = collections.all.products -%}{%- endif -%}
+{%- if collection == blank -%}{%- assign collection = collections['alle-produkte'] -%}{%- assign products = collection.products -%}{%- endif -%}
+{%- if products.size == 0 -%}{%- assign products = collections.all.products -%}{%- endif -%}
 
 <section class="section" id="shop">
   <div class="container">
@@ -27,7 +29,7 @@
     </div>
 
     <div style="text-align:center;margin-top:64px" data-reveal>
-      <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="btn btn--ghost" data-magnetic>Alle Produkte <span class="arrow">→</span></a>
+      <a href="{{ collection.url | default: shop_url }}" class="btn btn--ghost" data-magnetic>Alle Produkte <span class="arrow">→</span></a>
     </div>
   </div>
 </section>

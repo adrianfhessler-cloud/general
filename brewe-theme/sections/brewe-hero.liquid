@@ -1,3 +1,4 @@
+{%- assign shop_url = collections['alle-produkte'].url | default: routes.all_products_collection_url -%}
 <section class="hero" id="hero">
   <div class="hero-canvas" data-brewe-scene>
     <canvas aria-hidden="true"></canvas>
@@ -9,7 +10,7 @@
     <p class="hero-slogan" data-reveal style="--d: .9s">{{ section.settings.slogan }}</p>
     <p class="hero-copy" data-reveal style="--d: 1.05s">{{ section.settings.copy }}</p>
     <div class="hero-ctas" data-reveal style="--d: 1.2s">
-      <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn" data-magnetic>
+      <a href="{{ section.settings.cta_link | default: shop_url }}" class="btn" data-magnetic>
         {{ section.settings.cta_label }} <span class="arrow">→</span>
       </a>
       <a href="#ritual" class="btn btn--ghost" data-magnetic>Das Ritual</a>

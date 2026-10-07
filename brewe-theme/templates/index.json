@@ -1,21 +1,89 @@
 {
   "sections": {
-    "hero": { "type": "brewe-hero", "settings": {} },
-    "marquee": { "type": "brewe-marquee", "settings": {} },
-    "products": { "type": "brewe-products", "settings": { "limit": 6 } },
+    "hero": {
+      "type": "brewe-hero",
+      "settings": {}
+    },
+    "marquee": {
+      "type": "brewe-marquee",
+      "settings": {}
+    },
+    "products": {
+      "type": "brewe-products",
+      "settings": {
+        "limit": 6,
+        "collection": "alle-produkte"
+      }
+    },
     "ritual": {
       "type": "brewe-ritual",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Mahlen", "text": "Frisch gemahlen, fein wie Puderzucker – direkt vor dem Bezug.", "value": "18", "unit": "g", "label": "Dosis" } },
-        "s2": { "type": "step", "settings": { "title": "Tampen", "text": "Gleichmäßig verdichten für eine perfekte Extraktion ohne Channeling.", "value": "15", "unit": "kg", "label": "Anpressdruck" } },
-        "s3": { "type": "step", "settings": { "title": "Extrahieren", "text": "Honigartig fließender Espresso mit dichter, haselnussbrauner Crema.", "value": "27", "unit": "s", "label": "Bezugszeit" } },
-        "s4": { "type": "step", "settings": { "title": "Genießen", "text": "Dein Moment. Dein Ritual. Barista-Qualität – zuhause.", "value": "36", "unit": "g", "label": "Im Becher" } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Mahlen",
+            "text": "Frisch gemahlen, fein wie Puderzucker – direkt vor dem Bezug.",
+            "value": "18",
+            "unit": "g",
+            "label": "Dosis"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Tampen",
+            "text": "Gleichmäßig verdichten für eine perfekte Extraktion ohne Channeling.",
+            "value": "15",
+            "unit": "kg",
+            "label": "Anpressdruck"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Extrahieren",
+            "text": "Honigartig fließender Espresso mit dichter, haselnussbrauner Crema.",
+            "value": "27",
+            "unit": "s",
+            "label": "Bezugszeit"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "Genießen",
+            "text": "Dein Moment. Dein Ritual. Barista-Qualität – zuhause.",
+            "value": "36",
+            "unit": "g",
+            "label": "Im Becher"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {}
     },
-    "features": { "type": "brewe-features", "settings": {} },
-    "banner": { "type": "brewe-banner", "settings": {} }
+    "features": {
+      "type": "brewe-features",
+      "settings": {}
+    },
+    "banner": {
+      "type": "brewe-banner",
+      "settings": {
+        "link": "/products/ritual-starter-set"
+      }
+    }
   },
-  "order": ["hero", "marquee", "products", "ritual", "features", "banner"]
+  "order": [
+    "hero",
+    "marquee",
+    "products",
+    "ritual",
+    "features",
+    "banner"
+  ]
 }

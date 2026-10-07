@@ -1,3 +1,7 @@
+{%- assign shop_url = collections['alle-produkte'].url | default: routes.all_products_collection_url -%}
+{%- assign menu_shop = linklists[section.settings.menu_shop] -%}{%- unless menu_shop.links.size > 0 -%}{%- assign menu_shop = linklists['footer-shop'] -%}{%- endunless -%}
+{%- assign menu_service = linklists[section.settings.menu_service] -%}{%- unless menu_service.links.size > 0 -%}{%- assign menu_service = linklists['footer-service'] -%}{%- endunless -%}
+{%- assign menu_legal = linklists[section.settings.menu_legal] -%}{%- unless menu_legal.links.size > 0 -%}{%- assign menu_legal = linklists['footer-legal'] -%}{%- endunless -%}
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -5,18 +9,23 @@
         <a href="{{ routes.root_url }}" class="logo">BREW<span>É</span></a>
         <p>Your Coffee. Your Ritual.</p>
       </div>
+
       <div class="footer-col">
-        <h4>Shop</h4>
+        <h4>{{ menu_shop.title | default: 'Shop' }}</h4>
         <ul>
-          <li><a href="{{ routes.all_products_collection_url }}">Alle Produkte</a></li>
-          <li><a href="{{ routes.collections_url }}">Kollektionen</a></li>
-          <li><a href="{{ routes.cart_url }}">Warenkorb</a></li>
+          {%- for link in menu_shop.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            <li><a href="{{ shop_url }}">Alle Produkte</a></li>
+            <li><a href="{{ routes.cart_url }}">Warenkorb</a></li>
+          {%- endfor -%}
         </ul>
       </div>
+
       <div class="footer-col">
-        <h4>Info</h4>
+        <h4>{{ menu_service.title | default: 'Service' }}</h4>
         <ul>
-          {%- for link in linklists[section.settings.menu].links -%}
+          {%- for link in menu_service.links -%}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {%- else -%}
             <li><a href="{{ routes.root_url }}#ritual">Das Ritual</a></li>
@@ -24,8 +33,23 @@
           {%- endfor -%}
         </ul>
       </div>
+
+      <div class="footer-col">
+        <h4>{{ menu_legal.title | default: 'Rechtliches' }}</h4>
+        <ul>
+          {%- for link in menu_legal.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            {%- for policy in shop.policies -%}
+              <li><a href="{{ policy.url }}">{{ policy.title }}</a></li>
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
       <div class="footer-col">
         <h4>Newsletter</h4>
+        <p class="footer-note">Neue Röstungen, Rezepte und exklusive Angebote.</p>
         {%- form 'customer', class: 'newsletter-form' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
           {%- if form.posted_successfully? -%}
@@ -43,7 +67,7 @@
     <div class="footer-wordmark" aria-hidden="true" data-parallax="0.08">BREWÉ</div>
 
     <div class="footer-bottom">
-      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <span>© {{ 'now' | date: '%Y' }} BREWÉ</span>
       <span>Brew Your Moment.</span>
     </div>
   </div>
@@ -53,7 +77,9 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Info-Menü", "default": "footer" }
+    { "type": "link_list", "id": "menu_shop", "label": "Shop-Menü" },
+    { "type": "link_list", "id": "menu_service", "label": "Service-Menü" },
+    { "type": "link_list", "id": "menu_legal", "label": "Rechtliches-Menü" }
   ]
 }
 {% endschema %}

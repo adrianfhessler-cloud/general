@@ -1,0 +1,26 @@
+<article>
+  <section class="page-hero">
+    <div class="container">
+      <a href="{{ blog.url }}" class="eyebrow" data-reveal>{{ blog.title }}</a>
+      <h1 class="display article-title" data-split>{{ article.title }}</h1>
+      <p data-reveal>{{ article.published_at | date: '%d.%m.%Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</p>
+    </div>
+  </section>
+  {%- if article.image -%}
+    <div class="container" data-reveal="scale">
+      <div class="article-hero-img">{{ article.image | image_url: width: 1800 | image_tag: alt: article.title }}</div>
+    </div>
+  {%- endif -%}
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <div class="rte" data-reveal>{{ article.content }}</div>
+      <div style="text-align:center;margin-top:70px" data-reveal>
+        <a href="{{ blog.url }}" class="btn btn--ghost" data-magnetic>← Zurück zum {{ blog.title }}</a>
+      </div>
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{ "name": "Artikel" }
+{% endschema %}

@@ -12,6 +12,24 @@
       </div>
     {%- else -%}
       <div class="rte" data-reveal>{{ page.content }}</div>
+      {%- if page.handle == 'kontakt' or page.handle == 'contact' or page.template_suffix == 'contact' -%}
+        <div class="contact-wrap" data-reveal>
+          {%- form 'contact', class: 'contact-form' -%}
+            {%- if form.posted_successfully? -%}
+              <p class="form-success">Danke für deine Nachricht! Wir melden uns innerhalb von 24 Stunden.</p>
+            {%- else -%}
+              {%- if form.errors -%}<p class="form-error">{{ form.errors | default_errors }}</p>{%- endif -%}
+              <div class="field-row">
+                <label class="field"><span>Name</span><input type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name"></label>
+                <label class="field"><span>E-Mail *</span><input type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required></label>
+              </div>
+              <label class="field"><span>Bestellnummer (optional)</span><input type="text" name="contact[order]"></label>
+              <label class="field"><span>Nachricht *</span><textarea name="contact[body]" rows="6" required>{{ form.body }}</textarea></label>
+              <button type="submit" class="btn" data-magnetic>Nachricht senden <span class="arrow">→</span></button>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </section>
