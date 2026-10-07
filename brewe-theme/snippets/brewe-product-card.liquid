@@ -1,0 +1,33 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
+<article class="product-card" data-tilt data-reveal style="--d: {{ delay | default: 0 }}s">
+  <a href="{{ product.url }}" class="product-media" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(max-width: 600px) 100vw, 33vw', alt: product.title }}
+    {%- else -%}
+      {%- render 'brewe-placeholder', kind: 'bag' -%}
+    {%- endif -%}
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-badge">Sale</span>
+    {%- elsif product.tags contains 'Neu' or product.tags contains 'New' -%}
+      <span class="product-badge">Neu</span>
+    {%- endif -%}
+  </a>
+
+  {%- if variant.available -%}
+    <form action="{{ routes.cart_add_url }}" method="post">
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      <button type="submit" class="quick-add" aria-label="{{ 'general.add_to_cart' | t }}: {{ product.title | escape }}">+</button>
+    </form>
+  {%- endif -%}
+
+  <a href="{{ product.url }}" class="product-info">
+    <div>
+      <span class="type">{{ product.type | default: product.vendor }}</span>
+      <h3>{{ product.title }}</h3>
+    </div>
+    <span class="product-price">
+      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
+      {%- if product.price_varies -%}ab {% endif -%}{{ product.price | money }}
+    </span>
+  </a>
+</article>

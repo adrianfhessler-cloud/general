@@ -1,0 +1,21 @@
+<section class="page-hero">
+  <div class="container">
+    <h1 class="display" data-split>{%- if template.name == '404' -%}404{%- else -%}{{ page.title }}{%- endif -%}</h1>
+  </div>
+</section>
+<section class="section" style="padding-top:10px">
+  <div class="container">
+    {%- if template.name == '404' -%}
+      <div style="text-align:center" data-reveal>
+        <p style="color:var(--muted)">Diese Seite gibt es nicht – aber Kaffee gibt es immer.</p>
+        <a href="{{ routes.root_url }}" class="btn" data-magnetic>Zur Startseite</a>
+      </div>
+    {%- else -%}
+      <div class="rte" data-reveal>{{ page.content }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Seite" }
+{% endschema %}

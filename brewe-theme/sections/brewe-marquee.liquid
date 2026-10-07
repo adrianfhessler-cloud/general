@@ -1,0 +1,27 @@
+{%- assign phrases = section.settings.phrases | split: '|' -%}
+<div class="marquee" aria-label="{{ section.settings.phrases | replace: '|', ' · ' }}">
+  <div class="marquee-track" aria-hidden="true">
+    {%- for i in (1..2) -%}
+      <div class="marquee-item">
+        {%- for p in phrases -%}
+          <span>{{ p | strip }}</span><span class="dot"></span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Laufband",
+  "settings": [
+    {
+      "type": "text",
+      "id": "phrases",
+      "label": "Sätze (mit | trennen)",
+      "default": "Brew Your Moment.|Barista Quality. At Home.|Made for the Perfect Shot.|Your Coffee. Your Ritual."
+    }
+  ],
+  "presets": [{ "name": "Laufband" }]
+}
+{% endschema %}

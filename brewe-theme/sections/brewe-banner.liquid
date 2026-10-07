@@ -1,0 +1,30 @@
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="banner" data-reveal="scale">
+      <div class="banner-beans" aria-hidden="true">
+        <span data-parallax="-0.25" style="left:8%;top:18%;rotate:25deg"></span>
+        <span data-parallax="0.2" style="left:16%;bottom:14%;rotate:-40deg;scale:.7"></span>
+        <span data-parallax="-0.15" style="right:10%;top:24%;rotate:-15deg;scale:1.2"></span>
+        <span data-parallax="0.3" style="right:20%;bottom:10%;rotate:60deg;scale:.6"></span>
+      </div>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="display" style="margin-top:22px">{{ section.settings.title }}</h2>
+      <p>{{ section.settings.copy }}</p>
+      <a href="{{ section.settings.link | default: routes.all_products_collection_url }}" class="btn" data-magnetic>{{ section.settings.label }} <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA-Banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Starter-Set" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Your Coffee. Your Ritual." },
+    { "type": "textarea", "id": "copy", "label": "Text", "default": "Alles für deinen ersten perfekten Shot – Bohnen, Tamper und Milchkännchen in einem Set." },
+    { "type": "text", "id": "label", "label": "Button", "default": "Set entdecken" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [{ "name": "CTA-Banner" }]
+}
+{% endschema %}

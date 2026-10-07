@@ -1,0 +1,9 @@
+<section class="page-hero"><div class="container"><h1 class="display" data-split>Kollektionen</h1></div></section>
+<section class="section" style="padding-top:20px"><div class="container product-grid">
+  {%- for c in collections -%}
+    <a href="{{ c.url }}" class="product-card" data-tilt data-reveal>
+      <div class="product-media">{%- if c.image -%}{{ c.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: c.title }}{%- else -%}{%- render 'brewe-placeholder', kind: 'bag' -%}{%- endif -%}</div>
+      <div class="product-info"><div><span class="type">{{ c.products_count }} Produkte</span><h3>{{ c.title }}</h3></div></div>
+    </a>
+  {%- endfor -%}
+</div></section>

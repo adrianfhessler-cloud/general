@@ -1,0 +1,6 @@
+<section class="page-hero"><div class="container"><h1 class="display" data-split>Suche</h1>
+  <form action="{{ routes.search_url }}" class="newsletter" style="max-width:420px;margin:30px auto 0"><input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Wonach suchst du?" aria-label="Suche"><button aria-label="Suchen">→</button></form>
+</div></section>
+<section class="section" style="padding-top:20px"><div class="container product-grid">
+  {%- for item in search.results -%}{%- if item.object_type == 'product' -%}{%- render 'brewe-product-card', product: item -%}{%- endif -%}{%- endfor -%}
+</div></section>

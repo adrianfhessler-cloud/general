@@ -1,0 +1,65 @@
+<section class="ritual" id="ritual" data-story>
+  <div class="ritual-sticky">
+    <div class="container ritual-grid">
+      <div>
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="display" style="margin-top:18px">{{ section.settings.title }}</h2>
+        <ol class="ritual-steps">
+          {%- for block in section.blocks -%}
+            <li class="ritual-step{% if forloop.first %} is-active{% endif %}" data-step {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+        <div class="ritual-progress" aria-hidden="true"></div>
+      </div>
+
+      <div class="ritual-visual" aria-hidden="true">
+        <div class="ritual-orb"></div>
+        {%- for block in section.blocks -%}
+          <div class="step-visual{% if forloop.first %} is-active{% endif %}" data-step-visual>
+            <div>
+              <div class="big">{{ block.settings.value }}<span class="unit">{{ block.settings.unit }}</span></div>
+              <div class="label">{{ block.settings.label }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ritual (Scroll-Story)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Ritual" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Made for the Perfect Shot." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "value", "label": "Wert" },
+        { "type": "text", "id": "unit", "label": "Einheit" },
+        { "type": "text", "id": "label", "label": "Label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ritual (Scroll-Story)",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Mahlen", "text": "Frisch gemahlen, fein wie Puderzucker – direkt vor dem Bezug.", "value": "18", "unit": "g", "label": "Dosis" } },
+        { "type": "step", "settings": { "title": "Tampen", "text": "Gleichmäßig verdichten für eine perfekte Extraktion ohne Channeling.", "value": "15", "unit": "kg", "label": "Anpressdruck" } },
+        { "type": "step", "settings": { "title": "Extrahieren", "text": "Honigartig fließender Espresso mit dichter, haselnussbrauner Crema.", "value": "27", "unit": "s", "label": "Bezugszeit" } },
+        { "type": "step", "settings": { "title": "Genießen", "text": "Dein Moment. Dein Ritual. Barista-Qualität – zuhause.", "value": "36", "unit": "g", "label": "Im Becher" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

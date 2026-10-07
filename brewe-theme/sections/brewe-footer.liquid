@@ -1,0 +1,59 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="{{ routes.root_url }}" class="logo">BREW<span>É</span></a>
+        <p>Your Coffee. Your Ritual.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="{{ routes.all_products_collection_url }}">Alle Produkte</a></li>
+          <li><a href="{{ routes.collections_url }}">Kollektionen</a></li>
+          <li><a href="{{ routes.cart_url }}">Warenkorb</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          {%- for link in linklists[section.settings.menu].links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- else -%}
+            <li><a href="{{ routes.root_url }}#ritual">Das Ritual</a></li>
+            <li><a href="{{ routes.root_url }}#about">Über BREWÉ</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        {%- form 'customer', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p style="color:var(--gold);margin:0">Danke – willkommen im Ritual.</p>
+          {%- else -%}
+            <div class="newsletter">
+              <input type="email" name="contact[email]" placeholder="Deine E-Mail" aria-label="E-Mail" required>
+              <button type="submit" aria-label="Anmelden">→</button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+
+    <div class="footer-wordmark" aria-hidden="true" data-parallax="0.08">BREWÉ</div>
+
+    <div class="footer-bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <span>Brew Your Moment.</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Info-Menü", "default": "footer" }
+  ]
+}
+{% endschema %}

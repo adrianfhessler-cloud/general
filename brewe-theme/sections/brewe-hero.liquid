@@ -1,0 +1,44 @@
+<section class="hero" id="hero">
+  <div class="hero-canvas" data-brewe-scene>
+    <canvas aria-hidden="true"></canvas>
+  </div>
+
+  <div class="container hero-content">
+    <span class="eyebrow" data-reveal style="--d: .1s">{{ section.settings.eyebrow }}</span>
+    <h1 class="hero-title" data-split>{{ section.settings.title }}</h1>
+    <p class="hero-slogan" data-reveal style="--d: .9s">{{ section.settings.slogan }}</p>
+    <p class="hero-copy" data-reveal style="--d: 1.05s">{{ section.settings.copy }}</p>
+    <div class="hero-ctas" data-reveal style="--d: 1.2s">
+      <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn" data-magnetic>
+        {{ section.settings.cta_label }} <span class="arrow">→</span>
+      </a>
+      <a href="#ritual" class="btn btn--ghost" data-magnetic>Das Ritual</a>
+    </div>
+  </div>
+
+  <div class="container hero-meta" data-reveal="fade" style="--d: 1.5s">
+    <span class="scroll-cue"><i></i> Scroll</span>
+    <div class="hero-stats">
+      <span><b data-count="18">0</b>bar Druck</span>
+      <span><b data-count="93">0</b>°C Brühtemperatur</span>
+      <span><b data-count="25">0</b>Sek. Extraktion</span>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="{{ 'brewe-scene.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "BREWÉ 3D Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Premium Coffee · Est. 2026" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "BREWÉ" },
+    { "type": "text", "id": "slogan", "label": "Slogan", "default": "Your Coffee. Your Ritual." },
+    { "type": "textarea", "id": "copy", "label": "Text", "default": "Spezialitätenkaffee und Siebträger-Equipment für alle, die Barista-Qualität zuhause zelebrieren." },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "Jetzt entdecken" },
+    { "type": "url", "id": "cta_link", "label": "Button-Link" }
+  ],
+  "presets": [{ "name": "BREWÉ 3D Hero" }]
+}
+{% endschema %}

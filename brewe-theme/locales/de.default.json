@@ -1,0 +1,12 @@
+{
+  "general": {
+    "add_to_cart": "In den Warenkorb",
+    "sold_out": "Ausverkauft",
+    "cart": "Warenkorb",
+    "cart_empty": "Dein Warenkorb ist leer.",
+    "checkout": "Zur Kasse",
+    "subtotal": "Zwischensumme",
+    "remove": "Entfernen",
+    "continue": "Weiter einkaufen"
+  }
+}

@@ -1,0 +1,34 @@
+{%- paginate collection.products by 12 -%}
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" data-reveal>Kollektion</span>
+      <h1 class="display" data-split>{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}<p data-reveal>{{ collection.description | strip_html }}</p>{%- endif -%}
+    </div>
+  </section>
+  <section class="section" style="padding-top:20px">
+    <div class="container">
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {%- assign delay = forloop.index0 | modulo: 3 | times: 0.12 -%}
+          {%- render 'brewe-product-card', product: product, delay: delay -%}
+        {%- else -%}
+          <p style="color:var(--muted)">Noch keine Produkte in dieser Kollektion.</p>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Seiten">
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>
+            {%- elsif part.title == paginate.current_page -%}<span class="current">{{ part.title }}</span>
+            {%- else -%}<span>{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Kollektion" }
+{% endschema %}

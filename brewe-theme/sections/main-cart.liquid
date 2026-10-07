@@ -1,0 +1,40 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow" data-reveal>Your Ritual</span>
+    <h1 class="display" data-split>{{ 'general.cart' | t }}</h1>
+  </div>
+</section>
+<section class="section" style="padding-top:20px">
+  <div class="container">
+    {%- if cart.item_count == 0 -%}
+      <div style="text-align:center" data-reveal>
+        <p style="color:var(--muted)">{{ 'general.cart_empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn" data-magnetic>{{ 'general.continue' | t }}</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post">
+        {%- for item in cart.items -%}
+          <div class="cart-line" data-reveal style="--d: {{ forloop.index0 | times: 0.08 }}s">
+            {%- if item.image -%}{{ item.image | image_url: width: 200 | image_tag: alt: item.title }}{%- else -%}<div class="ph"></div>{%- endif -%}
+            <div>
+              <h3><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+              {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title }}</small>{%- endunless -%}
+              <div><a href="{{ item.url_to_remove }}" style="color:var(--gold);font-size:12px">{{ 'general.remove' | t }}</a></div>
+            </div>
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Menge">
+            <strong>{{ item.final_line_price | money }}</strong>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary">
+          <button type="submit" name="update" class="btn btn--ghost">Aktualisieren</button>
+          <span>{{ 'general.subtotal' | t }} <span class="total">{{ cart.total_price | money }}</span></span>
+          <button type="submit" name="checkout" class="btn" data-magnetic>{{ 'general.checkout' | t }} <span class="arrow">→</span></button>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Warenkorb" }
+{% endschema %}

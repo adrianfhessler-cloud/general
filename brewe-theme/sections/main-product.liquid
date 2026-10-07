@@ -1,0 +1,74 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="pdp">
+  <div class="container pdp-grid">
+    <div class="pdp-gallery" data-reveal="scale">
+      <div class="pdp-main">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 1400 | image_tag: data-main-image: '', alt: product.title, sizes: '(max-width: 860px) 100vw, 55vw' }}
+        {%- else -%}
+          {%- render 'brewe-placeholder', kind: 'bag' -%}
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="pdp-thumbs">
+          {%- for media in product.media limit: 6 -%}
+            {%- if media.media_type == 'image' -%}
+              <button type="button" data-thumb="{{ media | image_url: width: 1400 }}" aria-label="Bild {{ forloop.index }}">
+                {{ media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp-info">
+      <span class="eyebrow" data-reveal>{{ product.type | default: product.vendor }}</span>
+      <h1 class="display" data-split>{{ product.title }}</h1>
+      <div class="pdp-price" data-reveal style="--d:.3s">
+        {%- if current.compare_at_price > current.price -%}<s style="opacity:.5;margin-right:10px">{{ current.compare_at_price | money }}</s>{%- endif -%}
+        {{ current.price | money }}
+      </div>
+      <div class="pdp-desc" data-reveal style="--d:.4s">{{ product.description }}</div>
+
+      {%- form 'product', product, data-reveal: '', style: '--d:.5s' -%}
+        {%- unless product.has_only_default_variant -%}
+          <fieldset class="option-group">
+            <legend>{{ product.options | join: ' / ' }}</legend>
+            <div class="option-pills">
+              {%- for variant in product.variants -%}
+                <label>
+                  <input type="radio" name="id" value="{{ variant.id }}" {% if variant.id == current.id %}checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                  <span>{{ variant.title }} · {{ variant.price | money }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current.id }}">
+        {%- endunless -%}
+
+        <div class="buy-row">
+          <div class="qty" data-qty>
+            <button type="button" data-dir="down" aria-label="Weniger">−</button>
+            <input type="number" name="quantity" value="1" min="1" aria-label="Menge">
+            <button type="button" data-dir="up" aria-label="Mehr">+</button>
+          </div>
+          <button type="submit" class="btn" {% unless current.available %}disabled{% endunless %} data-magnetic>
+            {%- if current.available -%}{{ 'general.add_to_cart' | t }}{%- else -%}{{ 'general.sold_out' | t }}{%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <div class="pdp-perks" data-reveal style="--d:.6s">
+        <span>Frisch geröstet & innerhalb von 48 h versendet</span>
+        <span>Kostenloser Versand ab 49 €</span>
+        <span>30 Tage Rückgaberecht</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Produkt" }
+{% endschema %}

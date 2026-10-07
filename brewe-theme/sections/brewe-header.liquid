@@ -1,0 +1,41 @@
+{%- if section.settings.announcement != blank -%}
+  <div class="announcement">{{ section.settings.announcement }}</div>
+{%- endif -%}
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }}">BREW<span>É</span></a>
+
+    <nav class="nav" aria-label="Hauptnavigation">
+      {%- assign menu = linklists[section.settings.menu] -%}
+      {%- if menu.links.size > 0 -%}
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ routes.root_url }}#ritual">Ritual</a>
+        <a href="{{ routes.root_url }}#about">Über uns</a>
+      {%- endif -%}
+    </nav>
+
+    <div class="header-actions">
+      <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="{{ 'general.cart' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+      <button class="icon-btn menu-toggle" data-menu-toggle aria-expanded="false" aria-label="Menü">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 9h16M4 15h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "announcement", "label": "Ankündigung", "default": "Kostenloser Versand ab 49 € · Frisch geröstet" },
+    { "type": "link_list", "id": "menu", "label": "Menü", "default": "main-menu" }
+  ]
+}
+{% endschema %}
